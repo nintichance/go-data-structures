@@ -9,15 +9,35 @@ func main() {
 
 	dt, dts := getDataType()
 	for !searchSlice(dt, dts) {
-		fmt.Printf("Your input: %v is invalid. Please try again:\n", dt)
+		fmt.Printf("your input: %v is invalid. please try again:\n", dt)
 		fmt.Scan(&dt)
 	}
 
-	fmt.Printf("Wonderful! You chose: %v\n", dt)
+	fmt.Printf("wonderful! you chose: %v\n", dt)
 
-	if dt == "linkedlist" {
+	switch dt {
+	case "linkedlist":
 		runLinkedList()
+	case "stack":
+		var str string
+
+		fmt.Println("enter a string of characters: () {} [] in any combination--balanced or unbalanced")
+		fmt.Scan(&str)
+
+		for !isValidString(str) {
+			fmt.Printf("your input: %v is invalid. \nenter a string of characters: () {} [] in any combination--balanced or unbalanced\n", str)
+			fmt.Scan(&str)
+		}
+
+		if balanceParens(str) {
+			fmt.Printf("The input: %v is balanced\n", str)
+		} else {
+			fmt.Printf("The input: %v is not balanced\n", str)
+		}
+	default:
+		return
 	}
+
 }
 
 func getDataType() (string, []string) {
@@ -57,4 +77,22 @@ func runLinkedList() {
 	l.reverse()
 	l.print(l.Head)
 	fmt.Println("##############")
+}
+
+func isValidString(str string) bool {
+	isValid := false
+	for i := 0; i < len(str); i++ {
+		fmt.Println("THE STRING", str[i])
+
+		if string(str[i]) == "{" ||
+			string(str[i]) == "}" ||
+			string(str[i]) == "(" ||
+			string(str[i]) == ")" ||
+			string(str[i]) == "[" ||
+			string(str[i]) == "]" {
+			isValid = true
+		}
+	}
+
+	return isValid
 }
