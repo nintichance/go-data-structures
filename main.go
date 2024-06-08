@@ -56,8 +56,5 @@ func runLinkedList() {
 	fmt.Println("REVERSE ##############")
 	l.reverse()
 	l.print(l.Head)
-	fmt.Println("REVERSE RECURSIVE ##############")
-	l.reverseRecursive(l.Head)
-	l.print(l.Head)
 	fmt.Println("##############")
 }

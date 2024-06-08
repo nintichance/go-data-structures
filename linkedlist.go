@@ -70,13 +70,3 @@ func (l *LinkedList) reverse() {
 	}
 	l.Head = prev
 }
-
-func (l *LinkedList) reverseRecursive(n *Node) *Node {
-	if n == nil || n.Next == nil {
-		return n
-	}
-	newHead := l.reverseRecursive(n.Next)
-	n.Next.Next = n
-	n.Next = nil
-	return newHead
-}
