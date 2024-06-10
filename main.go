@@ -19,21 +19,9 @@ func main() {
 	case "linkedlist":
 		runLinkedList()
 	case "stack":
-		var str string
-
-		fmt.Println("enter a string of characters: () {} [] in any combination--balanced or unbalanced")
-		fmt.Scan(&str)
-
-		for !isValidString(str) {
-			fmt.Printf("your input: %v is invalid. \nenter a string of characters: () {} [] in any combination--balanced or unbalanced\n", str)
-			fmt.Scan(&str)
-		}
-
-		if balanceParens(str) {
-			fmt.Printf("The input: %v is balanced\n", str)
-		} else {
-			fmt.Printf("The input: %v is not balanced\n", str)
-		}
+		runStack()
+	case "queue":
+		runQueue()
 	default:
 		return
 	}
@@ -52,15 +40,21 @@ func getDataType() (string, []string) {
 	fmt.Scan(&dataType)
 	return dataType, dataTypes
 }
-func searchSlice(str string, arr []string) bool {
-	var found bool = false
-	for i := 0; i < len(arr); i++ {
-		if arr[i] == str {
-			found = true
-			break
+
+func isValidString(str string) bool {
+	isValid := false
+	for i := 0; i < len(str); i++ {
+		if string(str[i]) == "{" ||
+			string(str[i]) == "}" ||
+			string(str[i]) == "(" ||
+			string(str[i]) == ")" ||
+			string(str[i]) == "[" ||
+			string(str[i]) == "]" {
+			isValid = true
 		}
 	}
-	return found
+
+	return isValid
 }
 
 func runLinkedList() {
@@ -79,20 +73,43 @@ func runLinkedList() {
 	fmt.Println("##############")
 }
 
-func isValidString(str string) bool {
-	isValid := false
-	for i := 0; i < len(str); i++ {
-		fmt.Println("THE STRING", str[i])
+func runQueue() {
+	q := &Queue{}
+	q.Enqueue("Ninti")
+	q.Enqueue("Zaza")
+	q.Enqueue("Morgan")
+	q.Enqueue("Elijah")
+	fmt.Printf("The queue is: %v\n", *q)
+	dequeued := q.Dequeue()
+	fmt.Printf("%v made it to the front of the queue\n", dequeued)
 
-		if string(str[i]) == "{" ||
-			string(str[i]) == "}" ||
-			string(str[i]) == "(" ||
-			string(str[i]) == ")" ||
-			string(str[i]) == "[" ||
-			string(str[i]) == "]" {
-			isValid = true
-		}
+}
+
+func runStack() {
+	var str string
+
+	fmt.Println("enter a string of characters: () {} [] in any combination--balanced or unbalanced")
+	fmt.Scan(&str)
+
+	for !isValidString(str) {
+		fmt.Printf("your input: %v is invalid. \nenter a string of characters: () {} [] in any combination--balanced or unbalanced\n", str)
+		fmt.Scan(&str)
 	}
 
-	return isValid
+	if balanceParens(str) {
+		fmt.Printf("The input: %v is balanced\n", str)
+	} else {
+		fmt.Printf("The input: %v is not balanced\n", str)
+	}
+}
+
+func searchSlice(str string, arr []string) bool {
+	var found bool = false
+	for i := 0; i < len(arr); i++ {
+		if arr[i] == str {
+			found = true
+			break
+		}
+	}
+	return found
 }

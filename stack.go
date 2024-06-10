@@ -2,7 +2,6 @@ package main
 
 import (
 	"errors"
-	"fmt"
 )
 
 type Stack struct {
@@ -21,8 +20,6 @@ func (s *Stack) Push(element string) {
 	s.Size += 1
 
 	s.Storage[s.Size] = element
-	fmt.Println("ITS HERE???", s.Storage)
-
 }
 
 func (s *Stack) Pop() (string, error) {
